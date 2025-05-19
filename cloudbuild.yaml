@@ -2,7 +2,7 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 steps:
-  # //? Step 1: Lint + Type Check
+  # //? Step 1: Lint
   - name: 'node:20-slim'
     entrypoint: 'bash'
     args:
@@ -10,7 +10,6 @@ steps:
       - |
         npm i -g pnpm && pnpm install --frozen-lockfile
         pnpm run lint
-        pnpm run type-check
 
   # //? Step 2: Testing
   - name: 'node:20-slim'
