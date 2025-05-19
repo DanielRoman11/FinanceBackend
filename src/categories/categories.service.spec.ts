@@ -4,6 +4,7 @@ import { DeleteResult, Repository } from 'typeorm';
 import { Category } from './entities/category.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CreateCategoryDto } from './dto/create-category.dto';
+import { NotFoundException } from '@nestjs/common';
 
 describe('CategoriesService', () => {
   let service: CategoriesService;
@@ -78,7 +79,7 @@ describe('CategoriesService', () => {
   });
 
   describe('FindOne', () => {
-    it('Should return a category', async () => {
+    it('should return a category', async () => {
       const mockCategory: Category = {
         id: 1,
         name: 'Work',
@@ -92,6 +93,19 @@ describe('CategoriesService', () => {
       const result = await service.findOne(1);
 
       expect(result).toEqual(mockCategory);
+      expect(repo.findOneBy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should throw an exception when data category is not found', async () => {
+      jest.spyOn(repo, 'findOneBy').mockResolvedValue(null);
+
+      const promise = service.findOne(999);
+
+      await expect(promise).rejects.toBeInstanceOf(NotFoundException);
+      await expect(promise).rejects.toThrow(
+        'The category with id 999 was not found',
+      );
+
       expect(repo.findOneBy).toHaveBeenCalledTimes(1);
     });
   });
@@ -120,7 +134,7 @@ describe('CategoriesService', () => {
         name: 'New Name',
       });
 
-			expect(service.findOne).toHaveBeenCalledTimes(1);
+      expect(service.findOne).toHaveBeenCalledTimes(1);
       expect(result).toEqual(mockNewCategory);
       expect(repo.save).toHaveBeenCalledTimes(1);
     });
