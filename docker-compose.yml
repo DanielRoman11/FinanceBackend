@@ -1,0 +1,11 @@
+services:
+
+  db:
+    image: postgres
+    container_name: finance-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: finance
+    ports:
+      - 5432:5432
