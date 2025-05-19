@@ -1,3 +1,4 @@
+import { User } from 'src/auth/entities/user.entity';
 import { Category } from '../../categories/entities/category.entity';
 import {
   Column,
@@ -39,6 +40,9 @@ export class Transaction {
   })
   @JoinColumn()
   category: Relation<Category>;
+
+  @ManyToOne(() => User, (user) => user.transactions, { onDelete: 'CASCADE' })
+  user: Relation<User>;
 
   @CreateDateColumn()
   createdAt: Date;

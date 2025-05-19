@@ -1,4 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Transaction } from '../../transaction/entities/transaction.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  Relation,
+} from 'typeorm';
 
 @Entity()
 export class User {
@@ -13,4 +21,11 @@ export class User {
 
   @Column()
   picture: string;
+
+  @OneToMany(() => Transaction, (tr) => tr.user, {
+    cascade: true,
+    onDelete: 'CASCADE',
+    nullable: true,
+  })
+  transactions: Relation<Transaction[]>;
 }
