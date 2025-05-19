@@ -1,12 +1,38 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { useContainer } from 'class-validator';
+import * as session from 'express-session';
+import * as passport from 'passport';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET,
+      saveUninitialized: false,
+      resave: false,
+      cookie: {
+        maxAge: 60000,
+      },
+    }),
+  );
+  app.use(passport.initialize());
+  app.use(passport.session());
   app.setGlobalPrefix('api');
   app.enableCors({ origin: '*' });
-  await app.listen(3000, '0.0.0.0');
+  const port = process.env.PORT ?? 3000;
+  await app.listen(port, '0.0.0.0', () => {
+    console.log('Listening on port', port);
+  });
 }
 bootstrap();

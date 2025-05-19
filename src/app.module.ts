@@ -7,10 +7,13 @@ import { CommandModule } from 'nestjs-command';
 import { ScriptsService } from './utils/scripts.service';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
     CommandModule,
+    PassportModule.register({ session: true }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env'],
@@ -28,6 +31,7 @@ import { AppService } from './app.service';
     }),
     TransactionModule,
     CategoriesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, ScriptsService],
