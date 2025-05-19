@@ -2,7 +2,6 @@ import { Transaction } from '../../transaction/entities/transaction.entity';
 import {
   Column,
   Entity,
-  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
   Relation,

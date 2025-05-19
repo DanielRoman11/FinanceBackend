@@ -4,14 +4,21 @@ import { TransactionService } from './transaction.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 import { Category } from '../categories/entities/category.entity';
+import { User } from '../auth/entities/user.entity';
 
 describe('TransactionService', () => {
   let service: TransactionService;
   let repo: Repository<Transaction>;
+  let mockUser: User;
+
   const mockQueryBuilder = {
     andWhere: jest.fn().mockReturnThis(),
     orderBy: jest.fn().mockReturnThis(),
     getMany: jest.fn().mockResolvedValue([]),
+    leftJoin: jest.fn().mockReturnThis(),
+    leftJoinAndSelect: jest.fn().mockReturnThis(),
+    addSelect: jest.fn().mockReturnThis(),
+    where: jest.fn().mockReturnThis(),
   } as unknown as jest.Mocked<SelectQueryBuilder<Transaction>>;
 
   beforeEach(async () => {
@@ -34,6 +41,12 @@ describe('TransactionService', () => {
 
     service = module.get<TransactionService>(TransactionService);
     repo = module.get<Repository<Transaction>>(getRepositoryToken(Transaction));
+    mockUser = {
+      id: 1,
+      username: 'test-user',
+      email: 'test@test.com',
+      picture: '',
+    } as User;
   });
 
   it('should be defined', () => {
@@ -50,15 +63,20 @@ describe('TransactionService', () => {
           type: TransactionType.INCOME,
           createdAt: new Date(),
           updatedAt: new Date(),
+          user: { id: 1 } as User,
           category: { id: 1, name: 'Work' } as Category,
         },
       ];
 
       mockQueryBuilder.getMany.mockResolvedValue(mockTransactions);
 
-      const result = await service.findAll({});
+      const result = await service.findAll({}, mockUser);
 
       expect(result).toEqual(mockTransactions);
+      expect(mockQueryBuilder.leftJoin).toHaveBeenCalledTimes(1);
+      expect(mockQueryBuilder.leftJoinAndSelect).toHaveBeenCalledTimes(1);
+      expect(mockQueryBuilder.addSelect).toHaveBeenCalledTimes(1);
+      expect(mockQueryBuilder.where).toHaveBeenCalledTimes(1);
       expect(mockQueryBuilder.getMany).toHaveBeenCalledTimes(1);
     });
   });
@@ -73,6 +91,7 @@ describe('TransactionService', () => {
         createdAt: new Date(),
         updatedAt: new Date(),
         category: { id: 1, name: 'Work' } as Category,
+        user: { id: 1 } as User,
       };
 
       jest.spyOn(repo, 'findOneBy').mockResolvedValue(mockTransaction);

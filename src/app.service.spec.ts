@@ -1,10 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppService } from './app.service';
 import { DataSource } from 'typeorm';
+import { User } from './auth/entities/user.entity';
 
 describe('AppService', () => {
   let service: AppService;
   let dataSource: DataSource;
+  let mockUser: User;
   let mockResponse;
 
   beforeEach(async () => {
@@ -30,6 +32,12 @@ describe('AppService', () => {
         name: 'Test',
       },
     ];
+    mockUser = {
+      id: 1,
+      username: 'test-user',
+      email: 'test@test.com',
+      picture: '',
+    } as User;
   });
 
   it('should be defined', () => {
@@ -40,7 +48,7 @@ describe('AppService', () => {
     it('Should return data for the dashboard', async () => {
       jest.spyOn(dataSource, 'query').mockResolvedValue(mockResponse);
 
-      const result = await service.getSummary();
+      const result = await service.getSummary(mockUser);
 
       expect(dataSource.query).toHaveBeenCalledTimes(1);
       expect(result).toEqual(mockResponse);
@@ -51,7 +59,7 @@ describe('AppService', () => {
     it('should return data for the dashboard', async () => {
       jest.spyOn(dataSource, 'query').mockResolvedValue(mockResponse);
 
-      const result = await service.getSummary();
+      const result = await service.getSummary(mockUser);
 
       expect(dataSource.query).toHaveBeenCalledTimes(1);
       expect(result).toEqual(mockResponse);
@@ -61,7 +69,9 @@ describe('AppService', () => {
       const errorResponse = new Error('Db Error');
       jest.spyOn(dataSource, 'query').mockRejectedValue(errorResponse);
 
-      await expect(service.getSummary()).rejects.toThrow(errorResponse.message);
+      await expect(service.getSummary(mockUser)).rejects.toThrow(
+        errorResponse.message,
+      );
     });
   });
 });

@@ -4,10 +4,12 @@ import { TransactionService } from './transaction.service';
 import { Transaction, TransactionType } from './entities/transaction.entity';
 import { Category } from '../categories/entities/category.entity';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
+import { User } from '../auth/entities/user.entity';
 
 describe('TransactionController', () => {
   let controller: TransactionController;
   let service: TransactionService;
+  let mockUser: User;
 
   beforeEach(async () => {
     const mockTransactionService = {
@@ -30,6 +32,12 @@ describe('TransactionController', () => {
 
     controller = module.get(TransactionController);
     service = module.get(TransactionService);
+    mockUser = {
+      id: 1,
+      username: 'test-user',
+      email: 'test@test.com',
+      picture: '',
+    } as User;
   });
 
   it('should be defined', () => {
@@ -52,11 +60,12 @@ describe('TransactionController', () => {
         createdAt: new Date(),
         updatedAt: new Date(),
         category: { id: 1, name: 'Work' } as Category,
+        user: mockUser,
       };
 
       jest.spyOn(service, 'create').mockResolvedValue(mockTransaction);
 
-      const result = await service.create(mockTransactionDto);
+      const result = await service.create(mockTransactionDto, mockUser);
 
       expect(result).toEqual(mockTransaction);
       expect(service.create).toHaveBeenCalledTimes(1);

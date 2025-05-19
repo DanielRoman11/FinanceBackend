@@ -1,9 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Command } from 'nestjs-command';
 import { DataSource } from 'typeorm';
-import { seedTransactions, transactionsWithExistingCategories } from './data';
+import {
+  seedTransactions,
+  seedUsers,
+  transactionsWithExistingCategories,
+} from './data';
 import { exit } from 'process';
 import { Transaction } from '../transaction/entities/transaction.entity';
+import { User } from '../auth/entities/user.entity';
 
 @Injectable()
 export class ScriptsService {
@@ -17,9 +22,13 @@ export class ScriptsService {
     try {
       console.log('⚠️ Insertando Datos...');
       const transactionRepo = this.dataSource.getRepository(Transaction);
+      const userRepo = this.dataSource.getRepository(User);
+      await userRepo.save(seedUsers);
 
-      await transactionRepo.save(seedTransactions as any);
-			await transactionRepo.save(transactionsWithExistingCategories as any);
+      await Promise.all([
+        transactionRepo.save(seedTransactions as any),
+        transactionRepo.save(transactionsWithExistingCategories as any),
+      ]);
 
       console.log('✅ Datos Insertados');
       exit(0);

@@ -1,5 +1,28 @@
-import { CreateTransactionDto } from 'src/transaction/dto/create-transaction.dto';
+import { User } from '../auth/entities/user.entity';
+import { CreateTransactionDto } from '../transaction/dto/create-transaction.dto';
 import { TransactionType } from '../transaction/entities/transaction.entity';
+import { CreateUserDto } from '../auth/dto/create-user.dto';
+
+export const seedUsers: CreateUserDto[] = [
+  {
+    id: 1,
+    username: 'Daniel',
+    email: 'danielroman.05111@gmail.com',
+    picture: 'https://randomuser.me/api/portraits/women/1.jpg',
+  },
+  {
+    id: 2,
+    username: 'Daker',
+    email: 'daker.dev@gmail.com',
+    picture: 'https://randomuser.me/api/portraits/men/2.jpg',
+  },
+  {
+    id: 3,
+    username: 'Test',
+    email: 'dakerpro93@example.com',
+    picture: 'https://randomuser.me/api/portraits/men/3.jpg',
+  },
+];
 
 export const seedTransactions: CreateTransactionDto[] = [
   {
@@ -8,9 +31,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.INCOME,
     description: 'Monthly salary payment',
     createdAt: '2025-05-01T08:00:00Z',
-    category: {
-      name: 'Work',
-    },
+    category: { name: 'Work' },
+    user: {
+      id: 1,
+      username: 'Daniel',
+      email: 'danielroman.05111@gmail.com',
+      picture: 'https://randomuser.me/api/portraits/women/1.jpg',
+    } as User,
   },
   {
     name: 'Freelance Project',
@@ -18,9 +45,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.INCOME,
     description: 'Payment for freelance web project',
     createdAt: '2025-05-15T10:00:00Z',
-    category: {
-      name: 'Freelance',
-    },
+    category: { name: 'Freelance' },
+    user: {
+      id: 2,
+      username: 'Daker',
+      email: 'daker.dev@gmail.com',
+      picture: 'https://randomuser.me/api/portraits/men/2.jpg',
+    } as User,
   },
   {
     name: 'Groceries',
@@ -28,9 +59,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.EXPENSE,
     description: 'Weekly groceries shopping',
     createdAt: '2025-05-05T16:00:00Z',
-    category: {
-      name: 'Food',
-    },
+    category: { name: 'Food' },
+    user: {
+      id: 3,
+      username: 'Test',
+      email: 'dakerpro93@example.com',
+      picture: 'https://randomuser.me/api/portraits/men/3.jpg',
+    } as User,
   },
   {
     name: 'Electricity Bill',
@@ -38,9 +73,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.EXPENSE,
     description: 'Monthly electricity bill',
     createdAt: '2025-05-07T09:00:00Z',
-    category: {
-      name: 'Utilities',
-    },
+    category: { name: 'Utilities' },
+    user: {
+      id: 1,
+      username: 'Daniel',
+      email: 'danielroman.05111@gmail.com',
+      picture: 'https://randomuser.me/api/portraits/women/1.jpg',
+    } as User,
   },
   {
     name: 'Internet Bill',
@@ -48,9 +87,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.EXPENSE,
     description: 'Monthly internet subscription',
     createdAt: '2025-05-07T09:30:00Z',
-    category: {
-      name: 'Utilities',
-    },
+    category: { name: 'Utilities' },
+    user: {
+      id: 2,
+      username: 'Daker',
+      email: 'daker.dev@gmail.com',
+      picture: 'https://randomuser.me/api/portraits/men/2.jpg',
+    } as User,
   },
   {
     name: 'Gym Membership',
@@ -58,9 +101,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.EXPENSE,
     description: 'Monthly gym membership fee',
     createdAt: '2025-05-10T18:00:00Z',
-    category: {
-      name: 'Health',
-    },
+    category: { name: 'Health' },
+    user: {
+      id: 3,
+      username: 'Test',
+      email: 'dakerpro93@example.com',
+      picture: 'https://randomuser.me/api/portraits/men/3.jpg',
+    } as User,
   },
   {
     name: 'Dinner Out',
@@ -68,9 +115,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.EXPENSE,
     description: 'Dinner with friends',
     createdAt: '2025-05-12T20:00:00Z',
-    category: {
-      name: 'Entertainment',
-    },
+    category: { name: 'Entertainment' },
+    user: {
+      id: 1,
+      username: 'Daniel',
+      email: 'danielroman.05111@gmail.com',
+      picture: 'https://randomuser.me/api/portraits/women/1.jpg',
+    } as User,
   },
   {
     name: 'Stock Dividends',
@@ -78,9 +129,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.INCOME,
     description: 'Quarterly dividends received',
     createdAt: '2025-05-20T12:00:00Z',
-    category: {
-      name: 'Investments',
-    },
+    category: { name: 'Investments' },
+    user: {
+      id: 2,
+      username: 'Daker',
+      email: 'daker.dev@gmail.com',
+      picture: 'https://randomuser.me/api/portraits/men/2.jpg',
+    } as User,
   },
   {
     name: 'Coffee at Starbucks',
@@ -88,9 +143,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.EXPENSE,
     description: 'Morning coffee',
     createdAt: '2025-05-18T08:30:00Z',
-    category: {
-      name: 'Food',
-    },
+    category: { name: 'Food' },
+    user: {
+      id: 3,
+      username: 'Test',
+      email: 'dakerpro93@example.com',
+      picture: 'https://randomuser.me/api/portraits/men/3.jpg',
+    } as User,
   },
   {
     name: 'Uber Ride',
@@ -98,9 +157,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.EXPENSE,
     description: 'Ride to work',
     createdAt: '2025-05-17T09:15:00Z',
-    category: {
-      name: 'Transport',
-    },
+    category: { name: 'Transport' },
+    user: {
+      id: 1,
+      username: 'Daniel',
+      email: 'danielroman.05111@gmail.com',
+      picture: 'https://randomuser.me/api/portraits/women/1.jpg',
+    } as User,
   },
   {
     name: 'Spotify Subscription',
@@ -108,9 +171,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.EXPENSE,
     description: 'Monthly music subscription',
     createdAt: '2025-05-16T14:00:00Z',
-    category: {
-      name: 'Entertainment',
-    },
+    category: { name: 'Entertainment' },
+    user: {
+      id: 2,
+      username: 'Daker',
+      email: 'daker.dev@gmail.com',
+      picture: 'https://randomuser.me/api/portraits/men/2.jpg',
+    } as User,
   },
   {
     name: 'Sold Old Phone',
@@ -118,9 +185,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.INCOME,
     description: 'Selling used iPhone',
     createdAt: '2025-05-16T16:30:00Z',
-    category: {
-      name: 'Resale',
-    },
+    category: { name: 'Resale' },
+    user: {
+      id: 3,
+      username: 'Test',
+      email: 'dakerpro93@example.com',
+      picture: 'https://randomuser.me/api/portraits/men/3.jpg',
+    } as User,
   },
   {
     name: 'Lunch with Colleague',
@@ -128,9 +199,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.EXPENSE,
     description: 'Work lunch at local café',
     createdAt: '2025-05-15T13:00:00Z',
-    category: {
-      name: 'Food',
-    },
+    category: { name: 'Food' },
+    user: {
+      id: 1,
+      username: 'Daniel',
+      email: 'danielroman.05111@gmail.com',
+      picture: 'https://randomuser.me/api/portraits/women/1.jpg',
+    } as User,
   },
   {
     name: 'Online Course Sale',
@@ -138,9 +213,13 @@ export const seedTransactions: CreateTransactionDto[] = [
     type: TransactionType.INCOME,
     description: 'Revenue from Udemy course',
     createdAt: '2025-05-15T10:45:00Z',
-    category: {
-      name: 'Freelance',
-    },
+    category: { name: 'Freelance' },
+    user: {
+      id: 2,
+      username: 'Daker',
+      email: 'daker.dev@gmail.com',
+      picture: 'https://randomuser.me/api/portraits/men/2.jpg',
+    } as User,
   },
 ];
 
@@ -300,4 +379,3 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
     },
   },
 ];
-

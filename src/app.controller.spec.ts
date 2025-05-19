@@ -6,6 +6,7 @@ describe('AppController', () => {
   let controller: AppController;
   let service: AppService;
   let mockResult;
+  let mockUser;
 
   const mockService = {
     getSummary: jest.fn(),
@@ -33,6 +34,12 @@ describe('AppController', () => {
         name: 'Test',
       },
     ];
+    mockUser = {
+      id: 1,
+      username: 'test-user',
+      email: 'test@test.com',
+      picture: '',
+    };
   });
 
   it('should be defined', () => {
@@ -43,19 +50,17 @@ describe('AppController', () => {
     it('should return an Array of Summary data for the dashboard', async () => {
       jest.spyOn(service, 'getSummary').mockResolvedValue(mockResult);
 
-      const result = await controller.getSummary();
+      const result = await controller.getSummary(mockUser);
 
       expect(result).toEqual(mockResult);
       expect(service.getSummary).toHaveBeenCalledTimes(1);
     });
 
     it('should throw an error if query fails', async () => {
-      const errorResponse = new Error('Db Error')
-			jest
-        .spyOn(service, 'getSummary')
-        .mockRejectedValue(errorResponse);
+      const errorResponse = new Error('Db Error');
+      jest.spyOn(service, 'getSummary').mockRejectedValue(errorResponse);
 
-      await expect(service.getSummary()).rejects.toThrow(errorResponse.message);
+      await expect(service.getSummary(mockUser)).rejects.toThrow(errorResponse.message);
     });
   });
 });
