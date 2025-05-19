@@ -60,7 +60,9 @@ describe('AppController', () => {
       const errorResponse = new Error('Db Error');
       jest.spyOn(service, 'getSummary').mockRejectedValue(errorResponse);
 
-      await expect(service.getSummary(mockUser)).rejects.toThrow(errorResponse.message);
+      await expect(service.getSummary(mockUser)).rejects.toThrow(
+        errorResponse.message,
+      );
     });
   });
 });

@@ -10,11 +10,6 @@ import { SessionSerializer } from './utils/serializer';
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [AuthController],
-  providers: [
-    GoogleStrategy,
-    AuthService,
-    UserService,
-    SessionSerializer,
-  ],
+  providers: [GoogleStrategy, AuthService, UserService, SessionSerializer],
 })
 export class AuthModule {}

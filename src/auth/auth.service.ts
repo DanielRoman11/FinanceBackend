@@ -25,7 +25,7 @@ export class AuthService {
     }
 
     const userExists = await this.userRepo.findOneBy({ email: dto.email });
-		console.log(userExists)
+    console.log(userExists);
     return userExists ?? (await this.userRepo.save(dto));
   }
 }

@@ -1,11 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy, VerifyCallback } from 'passport-google-oauth20';
-import { User } from '../entities/user.entity';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { AuthService } from '../auth.service';
-import { validateOrReject } from 'class-validator';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
@@ -22,10 +20,10 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   }
 
   async validate(
-    accessToken: string,
-    refreshToken: string,
+    _accessToken: string,
+    _refreshToken: string,
     profile: Profile,
-    done: VerifyCallback,
+    _done: VerifyCallback,
   ): Promise<any> {
     const userDto: CreateUserDto = {
       email: profile.emails[0].value,
