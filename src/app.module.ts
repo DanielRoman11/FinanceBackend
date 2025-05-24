@@ -9,6 +9,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
+import { PaymentPlanModule } from './payment-plan/payment-plan.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { PassportModule } from '@nestjs/passport';
     TransactionModule,
     CategoriesModule,
     AuthModule,
+    PaymentPlanModule,
   ],
   controllers: [AppController],
   providers: [AppService, ScriptsService],
