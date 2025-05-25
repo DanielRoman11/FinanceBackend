@@ -33,11 +33,12 @@ describe('TransactionController', () => {
     controller = module.get(TransactionController);
     service = module.get(TransactionService);
     mockUser = {
-      id: 1,
+      id: 'afdb2c8d-dc32-4742-b8d1-2435110dde52',
       username: 'test-user',
       email: 'test@test.com',
-      picture: '',
-    } as User;
+      picture: 'test-picture',
+      createdAt: new Date(),
+    };
   });
 
   it('should be defined', () => {

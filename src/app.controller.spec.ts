@@ -1,12 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { User } from './auth/entities/user.entity';
 
 describe('AppController', () => {
   let controller: AppController;
   let service: AppService;
-  let mockResult;
-  let mockUser;
+  let mockResult: Record<string, string>[];
+  let mockUser: User;
 
   const mockService = {
     getSummary: jest.fn(),
@@ -35,10 +36,11 @@ describe('AppController', () => {
       },
     ];
     mockUser = {
-      id: 1,
+      id: 'afdb2c8d-dc32-4742-b8d1-2435110dde52',
       username: 'test-user',
       email: 'test@test.com',
-      picture: '',
+      picture: 'test-picture',
+      createdAt: new Date(),
     };
   });
 

@@ -3,6 +3,7 @@ import { PaymentPlan } from '../../payment-plan/entities/payment-plan.entity';
 import { Transaction } from '../../transaction/entities/transaction.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   ManyToMany,
   OneToMany,
@@ -29,16 +30,19 @@ export class User {
     onDelete: 'CASCADE',
     nullable: true,
   })
-  transactions: Relation<Transaction[]>;
+  transactions?: Relation<Transaction[]>;
 
   @OneToMany(() => PaymentRecord, (record) => record.user, { nullable: true })
-  paymentRecords: Relation<PaymentRecord[]>;
+  paymentRecords?: Relation<PaymentRecord[]>;
 
   @OneToMany(() => PaymentPlan, (plan) => plan.owner, { nullable: true })
-  ownedPlans: Relation<PaymentPlan[]>;
+  ownedPlans?: Relation<PaymentPlan[]>;
 
   @ManyToMany(() => PaymentPlan, (plans) => plans.collaborators, {
     nullable: true,
   })
-  sharedPlans: Relation<User[]>;
+  sharedPlans?: Relation<User[]>;
+
+	@CreateDateColumn()
+	createdAt: Date;
 }

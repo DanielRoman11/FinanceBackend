@@ -42,11 +42,12 @@ describe('TransactionService', () => {
     service = module.get<TransactionService>(TransactionService);
     repo = module.get<Repository<Transaction>>(getRepositoryToken(Transaction));
     mockUser = {
-      id: 1,
+      id: 'afdb2c8d-dc32-4742-b8d1-2435110dde52',
       username: 'test-user',
       email: 'test@test.com',
-      picture: '',
-    } as User;
+      picture: 'test-picture',
+      createdAt: new Date(),
+    };
   });
 
   it('should be defined', () => {
@@ -63,7 +64,7 @@ describe('TransactionService', () => {
           type: TransactionType.INCOME,
           createdAt: new Date(),
           updatedAt: new Date(),
-          user: { id: 1 } as User,
+          user: { id: 'afdb2c8d-dc32-4742-b8d1-2435110dde52' } as User,
           category: { id: 1, name: 'Work' } as Category,
         },
       ];
@@ -91,7 +92,7 @@ describe('TransactionService', () => {
         createdAt: new Date(),
         updatedAt: new Date(),
         category: { id: 1, name: 'Work' } as Category,
-        user: { id: 1 } as User,
+        user: { id: 'afdb2c8d-dc32-4742-b8d1-2435110dde52' } as User,
       };
 
       jest.spyOn(repo, 'findOneBy').mockResolvedValue(mockTransaction);
