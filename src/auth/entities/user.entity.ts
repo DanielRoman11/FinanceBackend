@@ -43,6 +43,6 @@ export class User {
   })
   sharedPlans?: Relation<User[]>;
 
-	@CreateDateColumn()
-	createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 }
