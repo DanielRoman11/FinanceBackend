@@ -10,15 +10,23 @@ import { Repository } from 'typeorm';
 import { Transaction } from './entities/transaction.entity';
 import { FindQueryParams } from './dto/findParams';
 import { User } from '../auth/entities/user.entity';
+import { UserService } from '../auth/user.service';
 
 @Injectable()
 export class TransactionService {
   constructor(
     @InjectRepository(Transaction)
     private readonly trRepo: Repository<Transaction>,
+    private readonly userService: UserService,
   ) {}
 
-  async create(dto: CreateTransactionDto, user: User): Promise<Transaction> {
+  async create(
+    dto: CreateTransactionDto,
+    currentUser: User,
+  ): Promise<Transaction> {
+    const user =
+      (await this.userService.findUserById(dto.userId)) ?? currentUser;
+
     return await this.trRepo.save({ ...dto, user });
   }
 

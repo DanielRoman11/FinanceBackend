@@ -5,18 +5,20 @@ import {
   IsNumber,
   IsOptional,
   IsPositive,
+  IsString,
+  IsUUID,
   Length,
   ValidateNested,
 } from 'class-validator';
 import { TransactionType } from '../entities/transaction.entity';
 import { Transform, Type } from 'class-transformer';
 import { CreateCategoryDto } from '../../categories/dto/create-category.dto';
-import { User } from '../../auth/entities/user.entity';
 
 export class CreateTransactionDto {
   @IsOptional()
-  @Type(() => User)
-  user?: User;
+  @IsString()
+  @IsUUID('4', { message: 'userId must be a valid UUID' })
+  userId?: string;
 
   @IsNotEmpty()
   @Length(1, 50)
