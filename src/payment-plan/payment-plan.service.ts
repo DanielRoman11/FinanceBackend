@@ -1,26 +1,43 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotImplementedException } from '@nestjs/common';
 import { CreatePaymentPlanDto } from './dto/create-payment-plan.dto';
 import { UpdatePaymentPlanDto } from './dto/update-payment-plan.dto';
+import { PaymentPlan } from './entities/payment-plan.entity';
+import { User } from '../auth/entities/user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PaymentPlanService {
-  create(createPaymentPlanDto: CreatePaymentPlanDto) {
-    return 'This action adds a new paymentPlan';
+  constructor(
+    @InjectRepository(PaymentPlan)
+    private paymentPlanRepo: Repository<PaymentPlan>,
+  ) {}
+
+  async create(
+    dto: CreatePaymentPlanDto,
+    currentUser: User,
+  ): Promise<PaymentPlan> {
+    try {
+      console.log(dto);
+      return await this.paymentPlanRepo.save({ ...dto, owner: currentUser });
+    } catch (err) {
+      console.error(err);
+    }
   }
 
-  findAll() {
-    return `This action returns all paymentPlan`;
+  async findAll(user: User): Promise<PaymentPlan[]> {
+    throw new NotImplementedException();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} paymentPlan`;
+  async findOne(id: string): Promise<PaymentPlan> {
+    throw new NotImplementedException();
   }
 
-  update(id: number, updatePaymentPlanDto: UpdatePaymentPlanDto) {
-    return `This action updates a #${id} paymentPlan`;
+  async update(id: string, dto: UpdatePaymentPlanDto): Promise<PaymentPlan> {
+    throw new NotImplementedException();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} paymentPlan`;
+  async remove(id: string) {
+    throw new NotImplementedException();
   }
 }
