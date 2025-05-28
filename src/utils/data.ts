@@ -1,23 +1,24 @@
-import { User } from '../auth/entities/user.entity';
 import { CreateTransactionDto } from '../transaction/dto/create-transaction.dto';
 import { TransactionType } from '../transaction/entities/transaction.entity';
 import { CreateUserDto } from '../auth/dto/create-user.dto';
+import { Currency, PaymentInterval, PaymentPlanStatus } from './enums';
+import { CreatePaymentPlanDto } from '../payment-plan/dto/create-payment-plan.dto';
 
 export const seedUsers: CreateUserDto[] = [
   {
-    id: 1,
+    id: 'd8fa5c31-0f9a-474e-ae99-d6b100bd3987',
     username: 'Daniel',
     email: 'danielroman.05111@gmail.com',
     picture: 'https://randomuser.me/api/portraits/women/1.jpg',
   },
   {
-    id: 2,
+    id: 'ed508ebc-fbce-4236-8f03-ad64aab450c3',
     username: 'Daker',
     email: 'daker.dev@gmail.com',
     picture: 'https://randomuser.me/api/portraits/men/2.jpg',
   },
   {
-    id: 3,
+    id: '78e3cf6e-3846-41d6-aebb-f6b2e497414e',
     username: 'Test',
     email: 'dakerpro93@example.com',
     picture: 'https://randomuser.me/api/portraits/men/3.jpg',
@@ -26,18 +27,16 @@ export const seedUsers: CreateUserDto[] = [
 
 export const seedTransactions: CreateTransactionDto[] = [
   {
-    name: 'Salary',
+    name: 'Salary Jan',
     amount: 3000,
     type: TransactionType.INCOME,
     description: 'Monthly salary payment',
     createdAt: '2025-05-01T08:00:00Z',
-    category: { name: 'Work' },
-    user: {
+    category: {
       id: 1,
-      username: 'Daniel',
-      email: 'danielroman.05111@gmail.com',
-      picture: 'https://randomuser.me/api/portraits/women/1.jpg',
-    } as User,
+      name: 'Work',
+    },
+    userId: seedUsers[0].id,
   },
   {
     name: 'Freelance Project',
@@ -46,12 +45,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Payment for freelance web project',
     createdAt: '2025-05-15T10:00:00Z',
     category: { name: 'Freelance' },
-    user: {
-      id: 2,
-      username: 'Daker',
-      email: 'daker.dev@gmail.com',
-      picture: 'https://randomuser.me/api/portraits/men/2.jpg',
-    } as User,
+    userId: seedUsers[1].id,
   },
   {
     name: 'Groceries',
@@ -60,12 +54,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Weekly groceries shopping',
     createdAt: '2025-05-05T16:00:00Z',
     category: { name: 'Food' },
-    user: {
-      id: 3,
-      username: 'Test',
-      email: 'dakerpro93@example.com',
-      picture: 'https://randomuser.me/api/portraits/men/3.jpg',
-    } as User,
+    userId: seedUsers[2].id,
   },
   {
     name: 'Electricity Bill',
@@ -74,12 +63,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Monthly electricity bill',
     createdAt: '2025-05-07T09:00:00Z',
     category: { name: 'Utilities' },
-    user: {
-      id: 1,
-      username: 'Daniel',
-      email: 'danielroman.05111@gmail.com',
-      picture: 'https://randomuser.me/api/portraits/women/1.jpg',
-    } as User,
+    userId: seedUsers[0].id,
   },
   {
     name: 'Internet Bill',
@@ -88,12 +72,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Monthly internet subscription',
     createdAt: '2025-05-07T09:30:00Z',
     category: { name: 'Utilities' },
-    user: {
-      id: 2,
-      username: 'Daker',
-      email: 'daker.dev@gmail.com',
-      picture: 'https://randomuser.me/api/portraits/men/2.jpg',
-    } as User,
+    userId: seedUsers[1].id,
   },
   {
     name: 'Gym Membership',
@@ -102,12 +81,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Monthly gym membership fee',
     createdAt: '2025-05-10T18:00:00Z',
     category: { name: 'Health' },
-    user: {
-      id: 3,
-      username: 'Test',
-      email: 'dakerpro93@example.com',
-      picture: 'https://randomuser.me/api/portraits/men/3.jpg',
-    } as User,
+    userId: seedUsers[2].id,
   },
   {
     name: 'Dinner Out',
@@ -116,12 +90,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Dinner with friends',
     createdAt: '2025-05-12T20:00:00Z',
     category: { name: 'Entertainment' },
-    user: {
-      id: 1,
-      username: 'Daniel',
-      email: 'danielroman.05111@gmail.com',
-      picture: 'https://randomuser.me/api/portraits/women/1.jpg',
-    } as User,
+    userId: seedUsers[0].id,
   },
   {
     name: 'Stock Dividends',
@@ -130,12 +99,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Quarterly dividends received',
     createdAt: '2025-05-20T12:00:00Z',
     category: { name: 'Investments' },
-    user: {
-      id: 2,
-      username: 'Daker',
-      email: 'daker.dev@gmail.com',
-      picture: 'https://randomuser.me/api/portraits/men/2.jpg',
-    } as User,
+    userId: seedUsers[1].id,
   },
   {
     name: 'Coffee at Starbucks',
@@ -144,12 +108,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Morning coffee',
     createdAt: '2025-05-18T08:30:00Z',
     category: { name: 'Food' },
-    user: {
-      id: 3,
-      username: 'Test',
-      email: 'dakerpro93@example.com',
-      picture: 'https://randomuser.me/api/portraits/men/3.jpg',
-    } as User,
+    userId: seedUsers[2].id,
   },
   {
     name: 'Uber Ride',
@@ -158,12 +117,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Ride to work',
     createdAt: '2025-05-17T09:15:00Z',
     category: { name: 'Transport' },
-    user: {
-      id: 1,
-      username: 'Daniel',
-      email: 'danielroman.05111@gmail.com',
-      picture: 'https://randomuser.me/api/portraits/women/1.jpg',
-    } as User,
+    userId: seedUsers[0].id,
   },
   {
     name: 'Spotify Subscription',
@@ -172,12 +126,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Monthly music subscription',
     createdAt: '2025-05-16T14:00:00Z',
     category: { name: 'Entertainment' },
-    user: {
-      id: 2,
-      username: 'Daker',
-      email: 'daker.dev@gmail.com',
-      picture: 'https://randomuser.me/api/portraits/men/2.jpg',
-    } as User,
+    userId: seedUsers[1].id,
   },
   {
     name: 'Sold Old Phone',
@@ -186,12 +135,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Selling used iPhone',
     createdAt: '2025-05-16T16:30:00Z',
     category: { name: 'Resale' },
-    user: {
-      id: 3,
-      username: 'Test',
-      email: 'dakerpro93@example.com',
-      picture: 'https://randomuser.me/api/portraits/men/3.jpg',
-    } as User,
+    userId: seedUsers[2].id,
   },
   {
     name: 'Lunch with Colleague',
@@ -200,12 +144,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Work lunch at local café',
     createdAt: '2025-05-15T13:00:00Z',
     category: { name: 'Food' },
-    user: {
-      id: 1,
-      username: 'Daniel',
-      email: 'danielroman.05111@gmail.com',
-      picture: 'https://randomuser.me/api/portraits/women/1.jpg',
-    } as User,
+    userId: seedUsers[0].id,
   },
   {
     name: 'Online Course Sale',
@@ -214,12 +153,7 @@ export const seedTransactions: CreateTransactionDto[] = [
     description: 'Revenue from Udemy course',
     createdAt: '2025-05-15T10:45:00Z',
     category: { name: 'Freelance' },
-    user: {
-      id: 2,
-      username: 'Daker',
-      email: 'daker.dev@gmail.com',
-      picture: 'https://randomuser.me/api/portraits/men/2.jpg',
-    } as User,
+    userId: seedUsers[1].id,
   },
 ];
 
@@ -231,9 +165,9 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
     description: 'Monthly salary payment',
     createdAt: '2025-05-01T08:00:00Z',
     category: {
-      id: 1,
       name: 'Work',
     },
+    userId: seedUsers[0].id,
   },
   {
     name: 'Freelance Project',
@@ -245,6 +179,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 2,
       name: 'Freelance',
     },
+    userId: seedUsers[1].id,
   },
   {
     name: 'Groceries',
@@ -256,6 +191,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 3,
       name: 'Food',
     },
+    userId: seedUsers[0].id,
   },
   {
     name: 'Electricity Bill',
@@ -267,6 +203,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 4,
       name: 'Utilities',
     },
+    userId: seedUsers[0].id,
   },
   {
     name: 'Internet Bill',
@@ -278,6 +215,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 4,
       name: 'Utilities',
     },
+    userId: seedUsers[0].id,
   },
   {
     name: 'Gym Membership',
@@ -289,6 +227,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 5,
       name: 'Health',
     },
+    userId: seedUsers[0].id,
   },
   {
     name: 'Dinner Out',
@@ -300,6 +239,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 6,
       name: 'Entertainment',
     },
+    userId: seedUsers[0].id,
   },
   {
     name: 'Stock Dividends',
@@ -311,6 +251,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 7,
       name: 'Investments',
     },
+    userId: seedUsers[1].id,
   },
   {
     name: 'Coffee at Starbucks',
@@ -322,6 +263,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 3,
       name: 'Food',
     },
+    userId: seedUsers[2].id,
   },
   {
     name: 'Uber Ride',
@@ -333,6 +275,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 8,
       name: 'Transport',
     },
+    userId: seedUsers[2].id,
   },
   {
     name: 'Spotify Subscription',
@@ -344,6 +287,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 6,
       name: 'Entertainment',
     },
+    userId: seedUsers[2].id,
   },
   {
     name: 'Sold Old Phone',
@@ -355,6 +299,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 9,
       name: 'Resale',
     },
+    userId: seedUsers[1].id,
   },
   {
     name: 'Lunch with Colleague',
@@ -366,6 +311,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 3,
       name: 'Food',
     },
+    userId: seedUsers[0].id,
   },
   {
     name: 'Online Course Sale',
@@ -377,5 +323,29 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
       id: 2,
       name: 'Freelance',
     },
+    userId: seedUsers[0].id,
+  },
+];
+
+export const seedTransactionPlans: CreatePaymentPlanDto[] = [
+  {
+    name: 'Viaje a España',
+    totalAmount: 10000000,
+    currency: Currency.COP,
+    interval: PaymentInterval.WEEKLY,
+    status: PaymentPlanStatus.ACTIVE,
+    startDate: '2025-05-11',
+    endDate: '2025-05-11',
+    participantIds: [seedUsers[0].id, seedUsers[1].id],
+  },
+  {
+    name: 'Pagar carro',
+    totalAmount: 10000000,
+    currency: Currency.COP,
+    interval: PaymentInterval.WEEKLY,
+    status: PaymentPlanStatus.ACTIVE,
+    startDate: '2025-05-11',
+    endDate: '2025-05-11',
+    participantIds: [seedUsers[0].id, seedUsers[2].id],
   },
 ];
