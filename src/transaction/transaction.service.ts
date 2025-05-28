@@ -34,6 +34,10 @@ export class TransactionService {
     return this.trRepo.createQueryBuilder('t').orderBy('t.createdAt', 'DESC');
   }
 
+  async findAllUsers() {
+    return await this.trRepo.find();
+  }
+
   async findAll(queryParams: FindQueryParams, user: User) {
     const { categoryName, amountFrom, amountTo, createdFrom, createdTo } =
       queryParams;

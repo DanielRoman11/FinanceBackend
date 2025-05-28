@@ -33,9 +33,14 @@ export class TransactionController {
 
   @Get()
   @UseGuards(AuthenticatedGuard)
-  findAll(@Query() query: FindQueryParams, @UserData() user: User) {
+  findAllByUser(@Query() query: FindQueryParams, @UserData() user: User) {
     return this.transactionService.findAll(query, user);
   }
+
+	@Get('all')
+	findAll() {
+		return this.transactionService.findAllUsers();
+	}
 
   @Get(':id')
   findOne(@Param('id') id: number) {

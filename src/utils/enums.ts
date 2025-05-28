@@ -32,3 +32,10 @@ export enum PaymentInterval {
   YEARLY = 'YEARLY', // Una vez al año
   ONCE = 'ONCE', // Solo una vez (sin recurrencia)
 }
+
+export enum Env {
+  DEVELOPMENT = 'development',
+  PRODUCTION = 'production',
+  TEST = 'test',
+  SCRIPTING = 'scripting',
+}

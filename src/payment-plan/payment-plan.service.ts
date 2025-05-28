@@ -18,7 +18,6 @@ export class PaymentPlanService {
     currentUser: User,
   ): Promise<PaymentPlan> {
     try {
-      console.log(dto);
       return await this.paymentPlanRepo.save({ ...dto, owner: currentUser });
     } catch (err) {
       console.error(err);

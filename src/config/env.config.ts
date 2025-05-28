@@ -7,6 +7,7 @@ export function ConfigModuleOptions(): ConfigModuleOptions<
   return {
     isGlobal: true,
     envFilePath: ['.env'],
+		expandVariables: true,
     validationSchema: Joi.object({
       //? -- API --
       DATABASE_URL: Joi.string().required(),

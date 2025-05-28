@@ -1,10 +1,12 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { GoogleOauthGuard } from './guards/google.guard';
 import { UserData } from './common/decorators/user.decorator';
 import { User } from './entities/user.entity';
+import { UserService } from './user.service';
 
 @Controller('auth')
 export class AuthController {
+  constructor(private readonly userService: UserService) {}
   @Get('google/login')
   @UseGuards(GoogleOauthGuard)
   handleLogin() {}
@@ -18,5 +20,10 @@ export class AuthController {
   @Get('status')
   userAuthenticated(@UserData() user: User) {
     return user ? { msg: 'Authenticated' } : { msg: 'Not Authenticated' };
+  }
+
+  @Get('user')
+  getUser(@Query('email') email: string) {
+    return this.userService.findUserByEmail(email);
   }
 }
