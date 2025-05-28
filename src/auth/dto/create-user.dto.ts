@@ -2,7 +2,7 @@ import { IsEmail, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateUserDto {
   @IsOptional()
-  id?: number;
+  id?: string;
 
   @IsEmail()
   email: string;
