@@ -12,7 +12,7 @@ export class CreatePaymentRecordDto {
   @IsPositive()
   amount: number;
 
-  @IsDateString({})
+  @IsDateString()
   paymentDate: string;
 
   @IsEnum(PaymentStatus)

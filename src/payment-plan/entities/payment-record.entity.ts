@@ -19,7 +19,7 @@ export class PaymentRecord {
   @Column('decimal')
   amount: number;
 
-  @Column('time without time zone')
+  @Column()
   paymentDate: Date;
 
   @Column('enum', { enum: PaymentStatus })
