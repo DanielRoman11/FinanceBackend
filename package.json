@@ -18,8 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "db:seed": "ts-node -r tsconfig-paths/register src/scripts.ts db:seed",
-    "db:reset": "ts-node -r tsconfig-paths/register src/scripts.ts db:reset"
+    "db": "ts-node -r tsconfig-paths/register src/scripts.ts db"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.17",
@@ -34,7 +33,7 @@
     "class-validator": "^0.14.2",
     "express-session": "^1.18.1",
     "joi": "^17.13.3",
-    "nestjs-command": "^3.1.5",
+    "nest-commander": "^3.17.0",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "pg": "^8.16.0",
