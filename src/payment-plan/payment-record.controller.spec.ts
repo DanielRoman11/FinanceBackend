@@ -19,7 +19,7 @@ describe('PaymentRecordController', () => {
   let mockPaymentPlan: PaymentPlan;
   let mockResult: PaymentRecord;
 
-  let mockServiceResult = {
+  const mockServiceResult = {
     create: jest.fn(),
   };
 

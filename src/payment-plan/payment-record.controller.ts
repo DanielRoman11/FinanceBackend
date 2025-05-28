@@ -10,7 +10,7 @@ export class PaymentRecordController {
   constructor(private readonly paymentRecordService: PaymentRecordService) {}
 
   @Post()
-	@UseGuards(AuthenticatedGuard)
+  @UseGuards(AuthenticatedGuard)
   create(@Body() dto: CreatePaymentRecordDto, @UserData() user: User) {
     return this.paymentRecordService.create(dto, user);
   }

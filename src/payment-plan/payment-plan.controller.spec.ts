@@ -10,7 +10,7 @@ describe('PaymentPlanController', () => {
   let controller: PaymentPlanController;
   let service: PaymentPlanService;
   let mockUser: User;
-	let mockResult: PaymentPlan;
+  let mockResult: PaymentPlan;
 
   beforeEach(async () => {
     const mockService = {
@@ -33,14 +33,14 @@ describe('PaymentPlanController', () => {
 
     controller = module.get<PaymentPlanController>(PaymentPlanController);
     service = module.get<PaymentPlanService>(PaymentPlanService);
-		mockUser = {
-			id: 'afdb2c8d-dc32-4742-b8d1-2435110dde52',
-			username: 'test-user',
-			email: 'test@test.com',
-			picture: 'test-picture',
-			createdAt: new Date(),
-		}
-		mockResult = {
+    mockUser = {
+      id: 'afdb2c8d-dc32-4742-b8d1-2435110dde52',
+      username: 'test-user',
+      email: 'test@test.com',
+      picture: 'test-picture',
+      createdAt: new Date(),
+    };
+    mockResult = {
       id: 'ad2c8d-dc32-4742-b8d1-2435110dde52',
       name: 'Test',
       totalAmount: 1000,

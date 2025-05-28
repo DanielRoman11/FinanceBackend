@@ -39,7 +39,7 @@ export class CreateTransactionDto {
   @Type(() => CreateCategoryDto)
   category: CreateCategoryDto;
 
-	@IsOptional()
+  @IsOptional()
   @IsString()
   @IsUUID('4', { message: 'userId must be a valid UUID' })
   userId?: string;

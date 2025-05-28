@@ -154,7 +154,7 @@ export class ScriptsCommand extends CommandRunner {
       });
     }
 
-		options.reset && (await this.resetData());
+    options.reset && (await this.resetData());
 
     if (options.seed) {
       await this.dataSource.synchronize(true);
