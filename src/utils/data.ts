@@ -329,6 +329,7 @@ export const transactionsWithExistingCategories: CreateTransactionDto[] = [
 
 export const seedTransactionPlans: CreatePaymentPlanDto[] = [
   {
+    ownerId: seedUsers[0].id,
     name: 'Viaje a España',
     totalAmount: 10000000,
     currency: Currency.COP,
@@ -339,6 +340,7 @@ export const seedTransactionPlans: CreatePaymentPlanDto[] = [
     participantIds: [seedUsers[0].id, seedUsers[1].id],
   },
   {
+    ownerId: seedUsers[0].id,
     name: 'Pagar carro',
     totalAmount: 10000000,
     currency: Currency.COP,

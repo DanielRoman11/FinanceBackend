@@ -94,11 +94,19 @@ export class ScriptsCommand extends CommandRunner {
         },
         [] as unknown as Transaction[],
       );
+      const cleanPaymentPlans = seedTransactionPlans.map((dto) => {
+        return {
+          ...dto,
+          owner: {
+            id: dto.ownerId,
+          } as User,
+        };
+      });
 
       const [_transactions, _transactions1, paymentPlans] = await Promise.all([
         transactionRepo.save(cleanTransactions1),
         transactionRepo.save(cleanTransactions2),
-        paymentPlanRepo.save(seedTransactionPlans),
+        paymentPlanRepo.save(cleanPaymentPlans),
       ]);
       console.log('✅ Transactions and Transaction Plans Added');
 
