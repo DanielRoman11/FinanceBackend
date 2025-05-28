@@ -35,20 +35,24 @@ export class PaymentPlanController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.paymentPlanService.findOne(id);
+  @UseGuards(AuthenticatedGuard)
+  findOne(@Param('id') id: string, @UserData() user: User) {
+    return this.paymentPlanService.findOne(id, user);
   }
 
   @Patch(':id')
+  @UseGuards(AuthenticatedGuard)
   update(
     @Param('id') id: string,
     @Body() updatePaymentPlanDto: UpdatePaymentPlanDto,
+    @UserData() user: User,
   ) {
-    return this.paymentPlanService.update(id, updatePaymentPlanDto);
+    return this.paymentPlanService.update(id, updatePaymentPlanDto, user);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.paymentPlanService.remove(id);
+	@UseGuards(AuthenticatedGuard)
+  remove(@Param('id') id: string, @UserData() user: User) {
+    return this.paymentPlanService.remove(id, user);
   }
 }
