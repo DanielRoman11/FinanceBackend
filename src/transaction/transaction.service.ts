@@ -34,10 +34,6 @@ export class TransactionService {
     return this.trRepo.createQueryBuilder('t').orderBy('t.createdAt', 'DESC');
   }
 
-  async findAllUsers() {
-    return await this.trRepo.find();
-  }
-
   async findAll(queryParams: FindQueryParams, user: User) {
     const { categoryName, amountFrom, amountTo, createdFrom, createdTo } =
       queryParams;
@@ -65,15 +61,17 @@ export class TransactionService {
     return await query.getMany();
   }
 
-  async findOne(id: number) {
-    const transaction = await this.trRepo.findOneBy({ id });
+  async findOne(id: number, user: User) {
+    const transaction = await this.trRepo.findOne({
+      where: { id, user: { id: user.id } },
+    });
     if (!transaction)
       throw new NotFoundException(`Transaction with id ${id} not found`);
     return transaction;
   }
 
   async update(id: number, dto: UpdateTransactionDto, user: User) {
-    const transaction = await this.findOne(id);
+    const transaction = await this.findOne(id, user);
     if (transaction.user.id !== user.id)
       throw new ForbiddenException(
         'You are not authorized to update this transaction',
@@ -85,7 +83,7 @@ export class TransactionService {
   }
 
   async remove(id: number, user: User) {
-    const transaction = await this.findOne(id);
+    const transaction = await this.findOne(id, user);
     if (transaction.user.id !== user.id)
       throw new ForbiddenException(
         'You are not authorized to delete this transaction',

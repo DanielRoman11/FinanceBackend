@@ -5,9 +5,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 import { Category } from '../categories/entities/category.entity';
 import { User } from '../auth/entities/user.entity';
+import { UserService } from '../auth/user.service';
 
 describe('TransactionService', () => {
   let service: TransactionService;
+  let userService: UserService;
   let repo: Repository<Transaction>;
   let mockUser: User;
 
@@ -29,17 +31,24 @@ describe('TransactionService', () => {
           provide: getRepositoryToken(Transaction),
           useValue: {
             find: jest.fn(),
-            findOneBy: jest.fn(),
+            findOne: jest.fn(),
             create: jest.fn(),
             save: jest.fn(),
             remove: jest.fn(),
             createQueryBuilder: jest.fn(() => mockQueryBuilder),
           },
         },
+        {
+          provide: UserService,
+          useValue: {
+            findUserById: jest.fn().mockResolvedValue(mockUser),
+          },
+        },
       ],
     }).compile();
 
     service = module.get<TransactionService>(TransactionService);
+    userService = module.get<UserService>(UserService);
     repo = module.get<Repository<Transaction>>(getRepositoryToken(Transaction));
     mockUser = {
       id: 'afdb2c8d-dc32-4742-b8d1-2435110dde52',
@@ -95,12 +104,12 @@ describe('TransactionService', () => {
         user: { id: 'afdb2c8d-dc32-4742-b8d1-2435110dde52' } as User,
       };
 
-      jest.spyOn(repo, 'findOneBy').mockResolvedValue(mockTransaction);
+      jest.spyOn(repo, 'findOne').mockResolvedValue(mockTransaction);
 
-      const result = await service.findOne(1);
+      const result = await service.findOne(1, mockUser);
 
       expect(result).toEqual(mockTransaction);
-      expect(repo.findOneBy).toHaveBeenCalledTimes(1);
+      expect(repo.findOne).toHaveBeenCalledTimes(1);
     });
   });
 });
