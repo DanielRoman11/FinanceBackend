@@ -25,10 +25,10 @@ export class PaymentPlan {
   @Column()
   name: string;
 
-  @Column({ type: 'timestamp with local time zone' })
+  @Column()
   startDate: Date;
 
-  @Column({ type: 'timestamp with local time zone' })
+  @Column()
   endDate: Date;
 
   @Column('decimal', { scale: 2 })

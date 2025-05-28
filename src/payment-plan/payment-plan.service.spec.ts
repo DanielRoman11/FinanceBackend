@@ -74,4 +74,14 @@ describe('PaymentPlanService', () => {
       expect(repo.save).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('getAll', () => {
+    it('should return all instances of PaymentPlan', async () => {
+      const mockResultArray: PaymentPlan[] = [mockResult];
+      const result = await service.findAll(mockUser);
+
+      expect(result).toEqual([mockResultArray]);
+      expect(repo.find).toHaveBeenCalledTimes(1);
+    });
+  });
 });
