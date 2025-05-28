@@ -7,7 +7,7 @@ export async function DatabaseConfigFactory(
   return {
     type: 'postgres',
     url: config.get('DATABASE_URL'),
-    entities: [__dirname + '/**/*.entity{.ts,.js}'],
+    entities: [process.cwd() + '/**/*.entity{.ts,.js}'],
     synchronize: config.get('NODE_ENV') !== 'production',
     logging: config.get('NODE_ENV') === 'development',
   };
