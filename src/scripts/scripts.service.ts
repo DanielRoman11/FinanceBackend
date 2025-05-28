@@ -50,6 +50,13 @@ export class ScriptsCommand extends CommandRunner {
 
   async insertData() {
     try {
+      console.log('⚠️ Synchronizing Entities...');
+      await this.dataSource.synchronize(true).then(async () => {
+        console.log(
+          'Entities loaded:',
+          this.dataSource.entityMetadatas.map((e) => e.name),
+        );
+      });
       console.log('⚠️ Getting Repositories...');
       const userRepo = this.dataSource.getRepository(User);
       const transactionRepo = this.dataSource.getRepository(Transaction);
@@ -57,6 +64,7 @@ export class ScriptsCommand extends CommandRunner {
       const paymentRecordRepo = this.dataSource.getRepository(PaymentRecord);
 
       console.log('⚠️ Adding Users...');
+
       await userRepo.save(seedUsers).then(() => console.log('✅ Users Added'));
 
       console.log('⚠️ Adding Transactions and Transaction Plans...');
