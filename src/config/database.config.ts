@@ -8,6 +8,7 @@ export async function DatabaseConfigFactory(
   return {
     type: 'postgres',
     url: config.get('DATABASE_URL'),
+		autoLoadEntities: true,
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
     synchronize: config.get('NODE_ENV') !== Env.PRODUCTION,
     logging: config.get('NODE_ENV') !== Env.PRODUCTION,
