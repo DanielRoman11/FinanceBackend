@@ -4,10 +4,12 @@ import { useContainer } from 'class-validator';
 import * as session from 'express-session';
 import * as passport from 'passport';
 import { GLOBAL_PIPES, SESSION_CONFIG } from './utils/contants';
+import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { bufferLogs: true });
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
+  app.useLogger(app.get(Logger));
   app.useGlobalPipes(GLOBAL_PIPES);
   app.use(session(SESSION_CONFIG));
   app.use(passport.initialize());
