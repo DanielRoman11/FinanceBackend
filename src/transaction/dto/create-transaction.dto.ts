@@ -15,11 +15,6 @@ import { Transform, Type } from 'class-transformer';
 import { CreateCategoryDto } from '../../categories/dto/create-category.dto';
 
 export class CreateTransactionDto {
-  @IsOptional()
-  @IsString()
-  @IsUUID('4', { message: 'userId must be a valid UUID' })
-  userId?: string;
-
   @IsNotEmpty()
   @Length(1, 50)
   @Transform(({ value }) => value.trim())
@@ -31,17 +26,23 @@ export class CreateTransactionDto {
   amount: number;
 
   @IsNotEmpty()
-  @ValidateNested()
-  @Type(() => CreateCategoryDto)
-  category: CreateCategoryDto;
-
-  @IsNotEmpty()
   @IsEnum(TransactionType)
   type: TransactionType;
 
   @IsOptional()
+  @IsString()
   @Length(1, 250)
   description?: string;
+
+  @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => CreateCategoryDto)
+  category: CreateCategoryDto;
+
+	@IsOptional()
+  @IsString()
+  @IsUUID('4', { message: 'userId must be a valid UUID' })
+  userId?: string;
 
   @IsOptional()
   @IsDateString()
