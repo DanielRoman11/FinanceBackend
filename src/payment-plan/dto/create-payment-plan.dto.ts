@@ -7,6 +7,7 @@ import {
   IsUUID,
   Length,
   Min,
+  IsOptional,
 } from 'class-validator';
 import {
   Currency,
@@ -40,7 +41,15 @@ export class CreatePaymentPlanDto {
   @IsEnum(PaymentInterval)
   interval: PaymentInterval;
 
+  @IsUUID()
+  @IsString()
+  ownerId: string;
+
   @IsArray()
   @IsUUID('all', { each: true })
   participantIds: string[];
+
+  @IsOptional()
+  @IsDateString()
+  createdAt?: string;
 }
