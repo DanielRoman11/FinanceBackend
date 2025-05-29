@@ -6,22 +6,25 @@ import { CreatePaymentPlanDto } from '../payment-plan/dto/create-payment-plan.dt
 
 export const seedUsers: CreateUserDto[] = [
   {
-    id: 'd8fa5c31-0f9a-474e-ae99-d6b100bd3987',
-    username: 'Daniel',
+    id: '6c93a91a-624f-47c4-ba0c-4b54612a83f3',
+    username: 'Daniel Román',
     email: 'danielroman.05111@gmail.com',
-    picture: 'https://randomuser.me/api/portraits/women/1.jpg',
+    picture:
+      'https://lh3.googleusercontent.com/a/ACg8ocLGbSxbKYojuPEqO0fdNpuZ1ia8zywu3IFEFRFyt0yxhTez-0hA=s96-c',
   },
   {
-    id: 'ed508ebc-fbce-4236-8f03-ad64aab450c3',
-    username: 'Daker',
+    id: 'f30fb304-acde-4fe1-bab4-78a4849893a2',
+    username: 'Daker R',
     email: 'daker.dev@gmail.com',
-    picture: 'https://randomuser.me/api/portraits/men/2.jpg',
+    picture:
+      'https://lh3.googleusercontent.com/a/ACg8ocIKJpwecoomty3swLOJyhBp3pim-YVFw1T9EVXYZB-mIvwpZg=s96-c',
   },
   {
-    id: '78e3cf6e-3846-41d6-aebb-f6b2e497414e',
-    username: 'Test',
-    email: 'dakerpro93@example.com',
-    picture: 'https://randomuser.me/api/portraits/men/3.jpg',
+    id: '715c869d-a886-46aa-a546-af55329b648b',
+    username: 'Daker 11',
+    email: 'dakerpro93@gmail.com',
+    picture:
+      'https://lh3.googleusercontent.com/a/ACg8ocJdnYHFpua5VFJrTNDqlaEgdM2-tVpdJD69tdfxFu39SpeBU1BB=s96-c',
   },
 ];
 

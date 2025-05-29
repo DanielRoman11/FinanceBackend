@@ -70,4 +70,16 @@ export class PaymentPlanService {
       );
     return await this.paymentPlanRepo.delete(id);
   }
+
+  async inviteCollaborator(user: User) {
+    const paymentPlan = await this.findOne(user.ownedPlans[0].id, user);
+    if (paymentPlan.collaborators.length >= 3)
+      throw new BadRequestException(
+        'You cannot invite more than 3 collaborators',
+      );
+    return await this.paymentPlanRepo.save({
+      ...paymentPlan,
+      collaborators: [...paymentPlan.collaborators, user],
+    });
+  }
 }

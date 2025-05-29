@@ -51,8 +51,18 @@ export class PaymentPlanController {
   }
 
   @Delete(':id')
-	@UseGuards(AuthenticatedGuard)
+  @UseGuards(AuthenticatedGuard)
   remove(@Param('id') id: string, @UserData() user: User) {
     return this.paymentPlanService.remove(id, user);
+  }
+
+  @Post('/:id/invite')
+  @UseGuards(AuthenticatedGuard)
+  inviteCollaborator(
+    @UserData() user: User,
+    @Body('emails') emails: string[],
+    @Param('id') id: string,
+  ) {
+    return this.paymentPlanService.inviteCollaborator(user);
   }
 }
